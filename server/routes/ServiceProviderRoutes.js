@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const ServiceProvider = require('../models/ServiceProvider');
 const User = require('../models/User')
+
 router.post('/', async (req, res) => {
   try {
     const serviceProvider = new ServiceProvider(req.body);
@@ -16,17 +17,17 @@ router.post('/', async (req, res) => {
 });
 
 
-router.post('/serviceproviders', async (req, res) => {
-  try {
-    const serviceProviderData = req.body;
-    console.log(serviceProviderData)
-    const serviceProvider = new ServiceProvider(serviceProviderData);
-    const savedServiceProvider = await serviceProvider.save();
-    res.json(savedServiceProvider);
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+// router.post('/serviceproviders', async (req, res) => {
+//   try {
+//     const serviceProviderData = req.body;
+//     console.log(serviceProviderData)
+//     const serviceProvider = new ServiceProvider(serviceProviderData);
+//     const savedServiceProvider = await serviceProvider.save();
+//     res.json(savedServiceProvider);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Internal Server Error' });
+//   }
+// });
 
 
 

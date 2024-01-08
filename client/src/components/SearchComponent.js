@@ -1,7 +1,6 @@
-// client/src/components/SearchComponent.js
+// SearchComponent.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const SearchComponent = () => {
   const [searchCriteria, setSearchCriteria] = useState({
@@ -10,10 +9,9 @@ const SearchComponent = () => {
   });
   const [results, setResults] = useState([]);
 
-  const handleSearch = async (e) => {
-    e.preventDefault(); // Prevents the default form submission behavior
+  const handleSearch = async () => {
     try {
-      const response = await axios.get('/api/serviceproviders', { params: searchCriteria });
+      const response = await axios.get('http://localhost:5000/api/serviceproviders', { params: searchCriteria });
       setResults(response.data);
     } catch (error) {
       console.error(error);
@@ -22,8 +20,7 @@ const SearchComponent = () => {
 
   const handleSelect = async (id) => {
     try {
-      await axios.put(`/api/serviceproviders/${id}`);
-      // After a successful update, you can update the UI accordingly
+      await axios.put(`http://localhost:5000/api/serviceproviders/${id}`);
       console.log('Service provider selected:', id);
     } catch (error) {
       console.error('Error selecting service provider:', error);
@@ -33,7 +30,7 @@ const SearchComponent = () => {
   return (
     <div>
       <h2>Service Provider Search</h2>
-      <form onSubmit={handleSearch}>
+      <form>
         <label htmlFor="service">Service:</label>
         <input
           type="text"
@@ -48,7 +45,7 @@ const SearchComponent = () => {
           value={searchCriteria.location}
           onChange={(e) => setSearchCriteria({ ...searchCriteria, location: e.target.value })}
         />
-        <button type="submit">Search</button>
+        <button type="button" onClick={handleSearch}>Search</button>
       </form>
 
       {results.length > 0 && (
@@ -64,8 +61,6 @@ const SearchComponent = () => {
           </ul>
         </div>
       )}
-
-      <Link to="/">Go Back to Home</Link>
     </div>
   );
 };

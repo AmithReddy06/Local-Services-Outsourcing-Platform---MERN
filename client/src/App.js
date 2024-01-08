@@ -4,14 +4,23 @@ import { Route, Routes } from 'react-router-dom';
 import ServiceProviderForm from './components/ServiceProviderForm';
 import UserForm from './components/UserForm';
 import SearchComponent from './components/SearchComponent';
+import ProviderLogin from './components/ProviderLogin'
+import LoginForm from './components/LoginForm';
+import ServiceProviderDetails from './components/ServiceProviderDetails';
+// import PaymentInterface from '.components/PaymentInterface'; // Replace with the correct path
 
 const App = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />}></Route>
       <Route path="/user-form" element={<UserForm />} />
+      <Route path="/login" element={<LoginForm />} />
+      <Route path="/plogin" element={<ProviderLogin />} />
       <Route path="/service-provider-form" element={<ServiceProviderForm />} />
       <Route path="/search" element={<SearchComponent />} />
+      <Route path="/serviceproviders/:id" component={ServiceProviderDetails} />
+      {/* <Route path="/payment/:id" component={PaymentInterface} /> */}
+  
     </Routes>
   );
 };
