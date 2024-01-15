@@ -28,7 +28,8 @@ const SearchComponent = () => {
   };
 
   return (
-    <div>
+    <div className='App'>
+      <div className='card'>
       <h2>Service Provider Search</h2>
       <form>
         <label htmlFor="service">Service:</label>
@@ -61,6 +62,7 @@ const SearchComponent = () => {
           </ul>
         </div>
       )}
+    </div>
     </div>
   );
 };

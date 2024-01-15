@@ -7,6 +7,8 @@ import SearchComponent from './components/SearchComponent';
 import ProviderLogin from './components/ProviderLogin'
 import LoginForm from './components/LoginForm';
 import ServiceProviderDetails from './components/ServiceProviderDetails';
+import './App.css';
+
 // import PaymentInterface from '.components/PaymentInterface'; // Replace with the correct path
 
 const App = () => {

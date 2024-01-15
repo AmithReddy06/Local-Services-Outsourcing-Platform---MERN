@@ -105,9 +105,11 @@ const UserForm = () => {
   };
 
   return (
-    <div>
-      <h2>User Registration Form</h2>
+    <div className="App">
+      <div className="card">
+      <h2 className='signup'>Sign In</h2>
       <form onSubmit={handleSubmit}>
+        <div className="mb-3">
         <label htmlFor="name">Name:</label>
         <input
           type="text"
@@ -115,7 +117,9 @@ const UserForm = () => {
           value={userData.name}
           onChange={(e) => setUserData({ ...userData, name: e.target.value })}
         />
+        </div>
         <br />
+        <div className="mb-3">
         <label htmlFor="location">Location:</label>
         <input
           type="text"
@@ -123,7 +127,9 @@ const UserForm = () => {
           value={userData.location}
           onChange={(e) => setUserData({ ...userData, location: e.target.value })}
         />
+        </div>
         <br />
+        <div className="mb-3">
         <label htmlFor="email">Email:</label>
         <input
           type="email"
@@ -131,7 +137,9 @@ const UserForm = () => {
           value={userData.email}
           onChange={(e) => setUserData({ ...userData, email: e.target.value })}
         />
+        </div>
         <br />
+        <div className="mb-3">
         <label htmlFor="password">Password:</label>
         <input
           type="password"
@@ -139,7 +147,9 @@ const UserForm = () => {
           value={userData.password}
           onChange={(e) => setUserData({ ...userData, password: e.target.value })}
         />
+        </div>
         <br />
+        <div className="mb-3">
         <label htmlFor="confirmPassword">Confirm Password:</label>
         <input
           type="password"
@@ -147,10 +157,13 @@ const UserForm = () => {
           value={userData.confirmPassword}
           onChange={(e) => setUserData({ ...userData, confirmPassword: e.target.value })}
         />
+        </div>
         <br />
         <button type="submit">Register</button>
       </form>
     </div>
+    </div>
+    // </div>
   );
 };
 
