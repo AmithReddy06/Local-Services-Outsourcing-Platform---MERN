@@ -272,6 +272,13 @@ const Notification = require('./models/Notification')
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+require('dotenv').config();
+
+
+const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
+const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
+
+
 // const serviceProviderController = require('../controllers/serviceProviderController');
 // const notificationController = require('./controllers/notificationController');
 

@@ -7,7 +7,10 @@ import SearchComponent from './components/SearchComponent';
 import ProviderLogin from './components/ProviderLogin'
 import LoginForm from './components/LoginForm';
 import ServiceProviderDetails from './components/ServiceProviderDetails';
-// import PaymentInterface from '.components/PaymentInterface'; // Replace with the correct path
+import PaymentPortal from './PaymentPortal';
+import PaymentSuccess from './PaymentSuccess';
+import PaymentFailure from './PaymentFailure';
+
 
 const App = () => {
   return (
@@ -19,6 +22,9 @@ const App = () => {
       <Route path="/service-provider-form" element={<ServiceProviderForm />} />
       <Route path="/search" element={<SearchComponent />} />
       <Route path="/serviceproviders/:id" component={ServiceProviderDetails} />
+      <Route path="/payment" component={PaymentPortal} />
+      <Route path="/payment-success" component={PaymentSuccess} />
+      <Route path="/payment-failure" component={PaymentFailure} />
       {/* <Route path="/payment/:id" component={PaymentInterface} /> */}
   
     </Routes>

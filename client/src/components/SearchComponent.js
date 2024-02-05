@@ -22,6 +22,11 @@ const SearchComponent = () => {
     try {
       await axios.put(`http://localhost:5000/api/serviceproviders/${id}`);
       console.log('Service provider selected:', id);
+
+      navigate('/payment', { state: { serviceProviderId: id } });
+
+      // useNavigate('/payment', { serviceProviderId: id });
+
     } catch (error) {
       console.error('Error selecting service provider:', error);
     }

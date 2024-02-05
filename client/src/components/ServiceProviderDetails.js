@@ -23,7 +23,7 @@ const ServiceProviderDetails = () => {
 
   const handlePayment = () => {
     // Assuming you have a route for the payment interface, navigate to it after payment
-    history(`/payment/${id}`);
+    navigate(`/payment/${id}`);
   };
 
   return (

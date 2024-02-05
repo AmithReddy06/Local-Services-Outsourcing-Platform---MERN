@@ -33,7 +33,7 @@ userSchema.pre('save', async function (next) {
     return next(error);
   }
 });
-
+ 
 // Compare a provided password with the hashed password in the database
 userSchema.methods.comparePassword = async function (candidatePassword) {
   try {
