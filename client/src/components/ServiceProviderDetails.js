@@ -1,45 +1,38 @@
 // ServiceProviderDetails.js
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useHistory, useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 const ServiceProviderDetails = () => {
-  const history = useNavigate();
   const { id } = useParams();
-  const [providerDetails, setProviderDetails] = useState(null);
+  const [serviceProvider, setServiceProvider] = useState(null);
 
   useEffect(() => {
-    const fetchProviderDetails = async () => {
+    const fetchServiceProviderDetails = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/serviceproviders/${id}`);
-        setProviderDetails(response.data);
+        console.log(response);
+        setServiceProvider(response.data);
       } catch (error) {
         console.error('Error fetching service provider details:', error);
       }
     };
 
-    fetchProviderDetails();
+    fetchServiceProviderDetails();
   }, [id]);
 
-  const handlePayment = () => {
-    // Assuming you have a route for the payment interface, navigate to it after payment
-    navigate(`/payment/${id}`);
-  };
+  if (!serviceProvider) {
+    return <div>Error...</div>;
+  }
 
   return (
     <div>
-      {providerDetails ? (
-        <div>
-          <h2>Service Provider Details</h2>
-          <p>Name: {providerDetails.name}</p>
-          <p>Location: {providerDetails.location}</p>
-          {/* Display other details as needed */}
-
-          <button onClick={handlePayment}>Proceed to Payment</button>
-        </div>
-      ) : (
-        <p>Loading...</p>
-      )}
+      <h2>Service Provider Details</h2>
+      <p>Name: {serviceProvider.name}</p>
+      <p>Service: {serviceProvider.service}</p>
+      <p>Location: {serviceProvider.location}</p>
+      <p>Cost: {serviceProvider.cost}</p>
+      {/* Add more details as needed */}
     </div>
   );
 };

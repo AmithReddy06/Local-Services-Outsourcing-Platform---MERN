@@ -7,9 +7,10 @@ import SearchComponent from './components/SearchComponent';
 import ProviderLogin from './components/ProviderLogin'
 import LoginForm from './components/LoginForm';
 import ServiceProviderDetails from './components/ServiceProviderDetails';
-import PaymentPortal from './PaymentPortal';
-import PaymentSuccess from './PaymentSuccess';
-import PaymentFailure from './PaymentFailure';
+import PaymentPortal from './components/PaymentPortal';
+import PaymentSuccess from './components/PaymentSuccess';
+import PaymentFailure from './components/PaymentFailure';
+// import ServiceProviderDetails from './components/ServiceProviderDetails';
 
 
 const App = () => {
@@ -21,10 +22,12 @@ const App = () => {
       <Route path="/plogin" element={<ProviderLogin />} />
       <Route path="/service-provider-form" element={<ServiceProviderForm />} />
       <Route path="/search" element={<SearchComponent />} />
-      <Route path="/serviceproviders/:id" component={ServiceProviderDetails} />
+      <Route path="/serviceproviders/:id" element={<ServiceProviderDetails />} />
       <Route path="/payment" component={PaymentPortal} />
       <Route path="/payment-success" component={PaymentSuccess} />
       <Route path="/payment-failure" component={PaymentFailure} />
+      <Route path="/serviceproviders/:id" component={ServiceProviderDetails} />
+
       {/* <Route path="/payment/:id" component={PaymentInterface} /> */}
   
     </Routes>

@@ -1,6 +1,8 @@
 // SearchComponent.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom'; // Add this line
+
 
 const SearchComponent = () => {
   const [searchCriteria, setSearchCriteria] = useState({
@@ -9,9 +11,15 @@ const SearchComponent = () => {
   });
   const [results, setResults] = useState([]);
 
-  const handleSearch = async () => {
+  const navigate = useNavigate();
+
+  const handleSearch = async (e) => {
+    e.preventDefault(); 
+    console.log('Search Criteria:', searchCriteria);
     try {
+      console.log("Searching...")
       const response = await axios.get('http://localhost:5000/api/serviceproviders', { params: searchCriteria });
+      console.log(response.data);
       setResults(response.data);
     } catch (error) {
       console.error(error);
@@ -20,13 +28,11 @@ const SearchComponent = () => {
 
   const handleSelect = async (id) => {
     try {
+      console.log("inside selection hanlder");
       await axios.put(`http://localhost:5000/api/serviceproviders/${id}`);
       console.log('Service provider selected:', id);
-
-      navigate('/payment', { state: { serviceProviderId: id } });
-
-      // useNavigate('/payment', { serviceProviderId: id });
-
+      // navigate(`/serviceproviders/${id}`);
+      window.location.href = `/serviceproviders/${id}`;
     } catch (error) {
       console.error('Error selecting service provider:', error);
     }
@@ -59,8 +65,9 @@ const SearchComponent = () => {
           <ul>
             {results.map((result) => (
               <li key={result._id}>
-                {result.service} - {result.location} - {result.cost}{' '}
+                {result._id} - {result.service} - {result.location} - {result.cost}{' '}
                 <button onClick={() => handleSelect(result._id)}>Select</button>
+                <Link to={`/serviceproviders/${result._id}`}>View Details</Link>
               </li>
             ))}
           </ul>

@@ -279,11 +279,7 @@ const razorpayKeyId = process.env.RAZORPAY_KEY_ID;
 const razorpayKeySecret = process.env.RAZORPAY_KEY_SECRET;
 
 
-// const serviceProviderController = require('../controllers/serviceProviderController');
-// const notificationController = require('./controllers/notificationController');
 
-
-// Allow requests from any origin during development
 const corsOptions = {
   origin: '*',
 };
@@ -291,19 +287,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-// app.post('/api/users', async (req, res) => {
-//   try {
-//     const userData = req.body;
-//     console.log('Received user data:', userData);
-//     const user = new User(userData);
-//     const savedUser = await user.save();
-//     res.json(savedUser);
-//     console.log(savedUser);
-//   } catch (error) {
-//     console.error('Error processing /users route:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+
 
 
 app.post('/api/users', async (req, res) => {
@@ -421,6 +405,8 @@ app.post('/api/serviceproviders', async (req, res) => {
 app.get('/api/serviceproviders', async (req, res) => {
   const { service, location } = req.query;
 
+  console.log('Received search criteria:', { service, location });
+
   try {
     const query = {
       service,
@@ -429,27 +415,13 @@ app.get('/api/serviceproviders', async (req, res) => {
     };
 
     const results = await ServiceProvider.find(query);
+    console.log('Search results:', results);
     res.json(results);
   } catch (error) {
     console.error('Error searching service providers:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
-
-// app.post('/notify/:serviceProviderId/:userId', async (req, res) => {
-//   const { serviceProviderId, userId } = req.params;
-//   const { message } = req.body;
-
-//   try {
-//     // You may want to add additional logic to check if the user has already notified this service provider.
-//     const notification = await notificationController.createNotification(serviceProviderId, userId, message);
-//     res.json(notification);
-//   } catch (error) {
-//     console.error('Error creating notification:', error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
 
 
 
@@ -475,15 +447,35 @@ app.put('/api/serviceproviders/:id', async (req, res) => {
 });
 
 
+
+
+app.get('/api/serviceproviders/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const serviceProvider = await ServiceProvider.findById(id);
+
+    if (!serviceProvider) {
+      return res.status(404).json({ error: 'Service provider not found' });
+    }
+
+    res.json(serviceProvider);
+  } catch (error) {
+    console.error('Error fetching service provider details by ID:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+
+
+
 app.listen(PORT, 'localhost', () => {
   console.log(`Server is running on port ${PORT}`);
 });
 
 
-//College
-// app.listen(PORT, '172.17.4.102', () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
 
 connectDB()
   .then(() => {
